@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Ley de Conservación de la Materia y Estequiometría</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            text-align: center;
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .image-container img {
+            width: 45%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        canvas {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Ley de Conservación de la Materia</h1>
+        <p>"La materia no se crea ni se destruye, solo se transforma."</p>
+        <button class="btn" onclick="mostrarEjemplo()">Ver Ejemplo</button>
+        <p id="ejemplo" class="hidden">Ejemplo: Cuando se quema madera, la masa de los productos (cenizas, gases) es igual a la masa de los reactivos (madera y oxígeno).</p><div class="image-container">
+        <img src="https://tse4.mm.bing.net/th?id=OIP.HhQOcmC2YfvDYobpxf7nLAHaEC&pid=Api&P=0&h=180" alt="Ejemplo de conservación de la materia">
+        <img src="https://i.ytimg.com/vi/8miamOnKDMw/maxresdefault.jpg" alt="Antoine Lavoisier - Padre de la ley de conservación de la materia">
+    </div>
+    
+    <h2>⚗ Estequiometría</h2>
+    <p>Es el cálculo de las cantidades de reactivos y productos en una reacción química. Se basa en la relación entre los coeficientes de la ecuación balanceada.</p>
+    <button class="btn" onclick="mostrarInfo()">Más información</button>
+    <p id="info" class="hidden">La estequiometría permite predecir cuánto producto se puede obtener a partir de cierta cantidad de reactivo. Se aplica en la industria química, farmacéutica y en procesos ambientales.</p>
+    
+    <div class="image-container">
+        <img src="https://i.ytimg.com/vi/3mNIFSRqLqg/maxresdefault.jpg" alt="Ejemplo de cálculo estequiométrico">
+        <img src="https://www.wikihow.com/images/thumb/d/d7/Balance-Chemical-Equations-Step-7-Version-2.jpg/v4-728px-Balance-Chemical-Equations-Step-7-Version-2.jpg" alt="Balanceo de ecuaciones químicas">
+    </div>
+    
+    <canvas id="grafico"></canvas>
+    <button class="btn" onclick="cambiarDatos()">Cambiar Datos</button>
+    <p><strong>📊 Explicación de la Gráfica:</strong> La gráfica muestra cómo la <b>masa de los reactivos</b> es igual a la <b>masa de los productos</b> en una reacción química, demostrando la Ley de Conservación de la Materia.</p>
+    <p>CARLOS ANTONIO GONZALEZ GOMEZ, MILTOM EMANUEL RODRIGUEZ PEREZ, WILLIAM PAUL MACIAS VAZQUEZ. 4 "G"</p>
+</div>
+
+<script>
+    function mostrarEjemplo() {
+        document.getElementById("ejemplo").classList.toggle("hidden");
+    }
+
+    function mostrarInfo() {
+        document.getElementById("info").classList.toggle("hidden");
+    }
+
+    const ctx = document.getElementById('grafico').getContext('2d');
+    let datosIniciales = [100, 100];
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Reactivos', 'Productos'],
+            datasets: [{
+                label: 'Masa (g)',
+                data: [...datosIniciales],
+                backgroundColor: ['#FF5733', '#33B5E5']
+            }]
+        }
+    });
+    
+    function cambiarDatos() {
+        if (chart.data.datasets[0].data[0] === datosIniciales[0]) {
+            chart.data.datasets[0].data = [150, 150];
+        } else {
+            chart.data.datasets[0].data = [...datosIniciales];
+        }
+        chart.update();
+    }
+</script>
+
+</body>
+</html>
